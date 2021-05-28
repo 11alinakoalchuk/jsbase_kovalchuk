@@ -7,7 +7,7 @@ function calculate(a, b, sign) {
   var result;
     if (isNaN(a) || isNaN(b)) {
         
-    alert("One of arguments is not a number!");
+    console.log("One of arguments is not a number!");
     return;
     }
     switch (sign) {
@@ -28,7 +28,7 @@ function calculate(a, b, sign) {
             break;
         }
         default: {
-            alert("Unsupported operation!");
+            console.log("Unsupported operation!");
             return;
         }
  
@@ -40,7 +40,7 @@ var b = +prompt("Enter number:");
 var sign = prompt("Enter sign:");
 result = calculate(a, b, sign);
 if (result != undefined) {
-    alert(result);
+    console.log(result);
 }
 //2.	Создать функцию, возводящую число в степень, число и сама степень вводится пользователем
 //Проверить числа на корректность
@@ -72,13 +72,18 @@ function fun1(a,b) {
     return r;
 }
  
-alert(fun1(number, power));
+console.log(fun1(number, power));
 //3.	Допишите функцию, которая определит, парное ли число (решение должно быть в одну строку).
 //Функция должна вернуть "Even" или "Odd";
 
 //function isEven(num) {
 // your code here
 //}
+
+function isEven(num) {
+    num % 2 === 0 ? console.log('Even') : console.log('Odd')
+}
+isEven(3)
 
 //4.	Напишите функцию, которая возвращает n-е число Фибоначчи.
 //Число, которое должна вернуть функция вводит пользователь.
@@ -109,7 +114,7 @@ function fibo(n) {
 }
  
 n = +prompt("Enter n:");
-alert(fibo(n));
+console.log(fibo(n));
 //5.  Создать игру "Камень-Ножницы-Бумага".
 //Выбор компьютера определяется строкой:  
 		
@@ -119,30 +124,44 @@ alert(fibo(n));
 //Запросить у пользователя один из трех вариантов "Камень-Ножницы-Бумага"
 //Сравнить ответ пользователя и компьютера, определить кто выиграл (или ничья)
 //Спросить пользователя, хочет ли он повторить, если "да", запустить игру заново
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
+var userChoice = prompt("Что выбираете, камень, ножницы или бумагу?");
+var computerChoice = Math.random();
+if (computerChoice < 0.34) {
+    computerChoice = "камень";
+} else if(computerChoice <= 0.67) {
+    computerChoice = "бумага";
+} else {
+    computerChoice = "ножницы";
 }
-         
-function play() {
-    do {
-        pcChoice = getRandomInt(0, 3);
- 
-        switch (pcChoice) {
-            case 0: 
-                alert("stone!");
-                break;
-            case 1:
-                alert("scissors!");
-                break;
-            case 2:
-                alert("paper!");
-                break;
-            default:
-                alert("Something wrong!");
-        }
-        question = confirm("Another one?");
+document.write("<p>Вы выбрали: " + userChoice + "</p>");
+document.write("<p>Компьютер выбрал: " + computerChoice + "</p><br>");
+var compare = function (choice1, choice2)
+{if (choice1 === choice2)
+{ document.write("Ничья.");
+} else if (choice1 === "камень") {
+    if (choice2 === "ножницы") {
+        document.write("Вы выиграли.");
     }
-    while (question);
+    else if (choice2 === "бумага") {
+        document.write("Вы проиграли.");
+    }
+} else if (choice1 === "бумага") {
+    if (choice2 === "камень") {
+        document.write("Вы выиграли.");
+    }
+    else if (choice2 === "ножницы") {
+        document.write("Вы проиграли.");
+    }
+} else if (choice1 === "ножницы") {
+    if (choice2 === "камень") {
+        document.write("Вы проиграли.");
+    }
+    else if (choice2 === "бумага") {
+        document.write("Вы выиграли.");
+    }
+} else if (choice1 === "") {
+    document.write("Вы ничего не выбрали! Введите камень, ножницы или бумага в поле и нажмите ОК.");
+} else if (choice1 !== "камень","бумага","ножницы") {
+    document.write("Нельзя выбирать предмет -> " + choice1 + ".<br> Введите камень, ножницы или бумага.");
 }
- 
-play();
+}
